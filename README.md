@@ -57,4 +57,60 @@ See [`ALGORITHM_EVIDENCE.md`](ALGORITHM_EVIDENCE.md) for test cases, correctness
 From the project folder containing `pom.xml`:
 
 ```bash
-mvn spring-boot:run
+mvn spring-boot:run 
+```
+
+
+
+
+Open http://localhost:8081.
+
+## 🧪 Try the timetable workflow
+1. Start CampusOS and add classroom records with their real floor, capacity, and availability.
+2. Open CSV upload and download the blank template or the synthetic demo timetable.
+3. The demo records use SYN-DEMO IDs and fabricated student counts. They are test inputs, not actual ATLAS enrollment.
+4. Upload a timetable CSV and review the import summary. Invalid rows show their row numbers and reasons.
+5. Open Allocation, choose the timetable date, and select Run Allocation.
+6. Review assignments and bottlenecks in Allocation results and Analysis & reports.
+The included demo timetable is located at:
+src/main/resources/static/sample-data/synthetic-timetable.csv
+📄 CSV format
+Required columns:
+classId,school,program,academicYear,division,studentCount,date,startTime,endTime
+Use the school codes UGDX, ISME, ISDI, or LAW; an exact program name from that school’s catalog; ISO dates (YYYY-MM-DD); and 24-hour times (HH:mm).
+
+CampusOS reports rejected records rather than silently ignoring them. Valid rows can be imported even if other rows in the file are rejected.
+🏫 Academic assumptions
+The supplied school weights are relative values, not percentages or enrollment counts:
+School	Weight
+UGDX	14
+ISME	65
+ISDI	55
+LAW	2
+
+
+CampusOS normalizes each weight by the total, 136, to display estimated proportions. It does not convert those proportions into student counts. Administrators can enter actual enrollment later. The approximately ten divisions per academic year figure is a planning assumption only; no divisions are generated automatically.
+💾 Storage
+By default, CampusOS stores data in a local H2 database at ./data/campusos. The database is created when the application starts and persists across restarts. No actual classrooms, timetable records, or enrollment counts are preloaded.
+
+Firebase is not connected in this version. See [`FIREBASE.md`](FIREBASE.md) for the planned setup path.
+📁 Project layout
+
+```
+CampusOS/
+├── src/
+│   ├── main/
+│   │   ├── java/edu/atlas/campusos/
+│   │   │   ├── model/       # Database entities
+│   │   │   ├── repo/        # Spring Data repositories
+│   │   │   ├── service/     # Allocation and analysis algorithms
+│   │   │   └── web/         # REST API and request handling
+│   │   └── resources/
+│   │       ├── static/      # Frontend and sample CSV
+│   │       └── application.properties
+│   └── test/                # Algorithm correctness tests
+├── ALGORITHM_EVIDENCE.md
+├── FIREBASE.md
+├── README.md
+└── pom.xml
+```
