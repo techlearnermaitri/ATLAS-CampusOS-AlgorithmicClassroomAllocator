@@ -1,0 +1,7 @@
+classId,school,program,academicYear,division,studentCount,date,startTime,endTime
+SYN-DEMO-01,UGDX,"B.Tech Computer Science — AI and Data Science",1,A,42,2026-12-01,09:00,10:00
+SYN-DEMO-02,ISME,BBA,1,A,38,2026-12-01,09:00,10:00
+SYN-DEMO-03,ISDI,B.Des Product Design,1,A,32,2026-12-01,09:30,10:30
+SYN-DEMO-04,LAW,"Integrated BBA LL.B.",1,A,28,2026-12-01,10:00,11:00
+SYN-DEMO-05,UGDX,"B.Tech Quantum Technology",2,B,24,2026-12-01,10:00,11:00
+SYN-DEMO-06,ISME,"BBA Honours — Finance",2,B,45,2026-12-01,11:00,12:00

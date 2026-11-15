@@ -1,0 +1,6 @@
+package edu.atlas.campusos.service;
+import org.junit.jupiter.api.Test;import java.util.*;import static org.junit.jupiter.api.Assertions.*;
+class BenchmarkServiceTest {
+ @Test void benchmarkUsesThreeIncreasingSyntheticInputSizes(){Map<String,Object> report=new BenchmarkService().run();assertTrue(String.valueOf(report.get("label")).contains("Synthetic"));List<?> sizes=(List<?>)report.get("sizes");assertEquals(3,sizes.size());assertEquals(List.of(50,200,800),sizes.stream().map(x->((Map<?,?>)x).get("classes")).toList());for(Object item:sizes){Map<?,?> row=(Map<?,?>)item;System.out.printf("BENCH classes=%s conflicts=%s DSATUR=%s ms (%s assigned) FirstFit=%s ms (%s assigned)%n",row.get("classes"),row.get("conflictPairs"),row.get("dsaturMedianMs"),row.get("dsaturAllocated"),row.get("firstFitMedianMs"),row.get("firstFitAllocated"));}}
+ @Test void benchmarkComparesBothAlgorithmsOnEachSize(){List<?> sizes=(List<?>)new BenchmarkService().run().get("sizes");for(Object x:sizes){Map<?,?> row=(Map<?,?>)x;assertTrue(row.containsKey("dsaturMedianMs"));assertTrue(row.containsKey("firstFitMedianMs"));assertTrue(((Number)row.get("dsaturAllocated")).intValue()<=((Number)row.get("classes")).intValue());assertTrue(((Number)row.get("firstFitAllocated")).intValue()<=((Number)row.get("classes")).intValue());}}
+}

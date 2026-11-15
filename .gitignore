@@ -1,0 +1,7 @@
+target/
+data/
+.m2-cache/
+*.log
+service-account*.json
+firebase-adminsdk*.json
+.env
