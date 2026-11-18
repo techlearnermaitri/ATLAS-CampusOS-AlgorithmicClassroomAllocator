@@ -1,5 +1,6 @@
 # 🏫 CampusOS
 
+<<<<<<< HEAD
 ### Classroom planning and allocation for ATLAS SKILLTECH University
 
 CampusOS helps university administrators manage classrooms and timetables, then automatically assign scheduled classes to available rooms. It brings algorithm-based allocation, capacity checks, and utilization reporting into one focused application.
@@ -55,14 +56,28 @@ See [`ALGORITHM_EVIDENCE.md`](ALGORITHM_EVIDENCE.md) for test cases, correctness
 ### Start the application
 
 From the project folder containing `pom.xml`:
+=======
+A practical classroom, event, and student study-space planner for ATLAS SKILLTECH University. CampusOS focuses on room inventory, timetables, and making better use of existing campus space.
+
+## Run it
+
+Requirements: Java 17+ and Maven 3.8+.
+>>>>>>> 97cb875 (Add CampusOS allocation insights)
 
 ```bash
 mvn spring-boot:run 
 ```
 
+<<<<<<< HEAD
+
+=======
+Open [http://localhost:8081](http://localhost:8081). Port 8081 avoids the common 8080 conflict. If needed, choose another port with `mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8082`.
+
+Run tests:
+>>>>>>> 97cb875 (Add CampusOS allocation insights)
 
 
-
+<<<<<<< HEAD
 Open http://localhost:8081.
 
 ## 🧪 Try the timetable workflow
@@ -76,6 +91,25 @@ The included demo timetable is located at:
 src/main/resources/static/sample-data/synthetic-timetable.csv
 📄 CSV format
 Required columns:
+=======
+CampusOS stores data in a local H2 database at `./data/campusos`; it persists across restarts. The four schools and their academic programs are built in. Rooms, divisions, actual enrollments, periods, timetable rows, and bookings are administrator-managed. The supplied school weights are shown as normalized proportions (14, 65, 55, and 2 out of 136); they are never treated as actual enrollment. No actual enrollment or division counts are invented.
+
+## Workflow
+
+1. Add campus rooms with their real floor, capacity, and availability.
+2. Add actual divisions and optional enrollment counts under Academic structure.
+3. Configure the university's non-overlapping timetable periods under Timetable & periods.
+4. Add classes manually or upload the CSV template. Each class time must exactly match a configured period to be eligible for allocation.
+5. Under Events & study spaces, enter exact start and end times (no period name is needed), preview events before confirming a room or whole-floor booking, and add student study-space requests. A preferred floor is tried first; if no suitable free room is there, CampusOS falls back to the smallest free room that fits elsewhere. Room availability is checked against the exact interval, including partial overlaps with classes.
+6. Select a date and run matching. CampusOS asks before replacing results already saved for that date.
+7. Review allocation results, unallocated reasons, and utilization reports.
+
+The Events page's impact preview shows available room/floor options and whether an event would reduce the number of classes that can be assigned. Booking priority is classes, then confirmed events, then study requests. A floor-wide event is confirmed only if the floor has sufficient available seating and does not reduce the class assignment count.
+
+## CSV format
+
+```text
+>>>>>>> 97cb875 (Add CampusOS allocation insights)
 classId,school,program,academicYear,division,studentCount,date,startTime,endTime
 Use the school codes UGDX, ISME, ISDI, or LAW; an exact program name from that school’s catalog; ISO dates (YYYY-MM-DD); and 24-hour times (HH:mm).
 
@@ -114,3 +148,21 @@ CampusOS/
 ├── README.md
 └── pom.xml
 ```
+<<<<<<< HEAD
+=======
+
+Use school codes `UGDX`, `ISME`, `ISDI`, or `LAW`; the exact program name; ISO dates (`YYYY-MM-DD`); and 24-hour times (`HH:mm`). Uploads report every rejected row and reason. Make CSV times match your configured periods.
+
+## Algorithms
+
+- **Bipartite maximum matching:** requests are left-side vertices, feasible classrooms are right-side vertices, and edges represent capacity, availability, floor, and time feasibility. BFS/DFS augmenting paths find a maximum-cardinality assignment within a priority tier. The three tiers are run in order, so lower-priority bookings cannot displace classes or confirmed events. This is maximum matching for the modeled period and constraints, not a claim that every possible campus timetable is globally optimal.
+- **Segment tree:** each classroom has an occupancy tree over minute-of-day slots. Availability queries and occupancy range updates take `O(log N)`. Half-open intervals `[start,end)` allow adjacent periods to use the same room.
+- **First-Fit:** a simple input-order baseline, compared with matching on deterministic synthetic requests and rooms.
+- **Randomized Quickselect:** reports actual median class size and room capacity without sorting the whole collection; expected `O(N)`, worst case `O(N²)`.
+
+The analysis page uses real saved data for operational charts and clearly labeled synthetic data for the algorithm benchmark. Read [ALGORITHM_EVIDENCE.md](ALGORITHM_EVIDENCE.md) for implementation details and test coverage.
+
+## Scope
+
+CampusOS is a space allocation tool, not a university ERP. It does not manage attendance, fees, examinations, payroll, or hostels.
+>>>>>>> 97cb875 (Add CampusOS allocation insights)

@@ -1,0 +1,13 @@
+classId,school,program,academicYear,division,studentCount,date,startTime,endTime
+TEST-UGDX-01,UGDX,B.Tech Computer Science — AI and Machine Learning,3,Voyagers,95,2026-11-23,09:00,10:00
+TEST-ISME-01,ISME,BBA,1,A,82,2026-11-23,09:00,10:00
+TEST-LAW-01,LAW,Integrated BBA LL.B.,1,B,28,2026-11-23,09:00,10:00
+TEST-ISDI-01,ISDI,B.Des Product Design,1,C,32,2026-11-23,09:00,10:00
+TEST-UGDX-02,UGDX,B.Tech Computer Science — AI and Machine Learning,3,Voyagers,75,2026-11-23,10:00,11:00
+TEST-ISME-02,ISME,BBA,1,A,42,2026-11-23,10:00,11:00
+TEST-LAW-02,LAW,Integrated BBA LL.B.,1,B,101,2026-11-23,10:00,11:00
+TEST-ISDI-02,ISDI,B.Des Product Design,1,C,80,2026-11-23,10:00,11:00
+TEST-UGDX-03,UGDX,B.Tech Computer Science — AI and Machine Learning,3,Voyagers,60,2026-11-23,11:00,12:00
+TEST-ISME-03,ISME,BBA,1,A,65,2026-11-23,11:00,12:00
+TEST-LAW-03,LAW,Integrated BBA LL.B.,1,B,25,2026-11-23,11:00,12:00
+TEST-ISDI-03,ISDI,B.Des Product Design,1,C,35,2026-11-23,11:00,12:00
